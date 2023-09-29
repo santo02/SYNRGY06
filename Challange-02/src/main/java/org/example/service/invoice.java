@@ -21,12 +21,12 @@ public  class invoice {
                 food food = item.getFoodItem();
                 int qty = item.getQuantity();
                 double itemTotal = food.getPrice() * qty;
-                writer.write(food.getName() + " " + qty + "\t\t|" + itemTotal + "00\n");
+                writer.write(food.getName() + "\t" + qty + "|\t"+ food.getPrice() +"\t|" + itemTotal +   "\t(" + item.getVarian() + ")\n");
                 totalItem += item.getQuantity();
             }
             writer.write("-----------------------------\n");
             writer.write(
-                    "Total\t\t|" + totalItem + "\t\t|" + totalPrice + "\n\n"
+                    "Total\t\t\t|" + totalItem + "\t\t|" + totalPrice + "\n\n"
             );
 
             writer.write("Pembayaran :     BinarCash\n\n");

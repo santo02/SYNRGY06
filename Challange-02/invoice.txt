@@ -1,0 +1,18 @@
+=============================
+Binarfud      
+=============================
+Terimakasih sudah memesan di Binarfud
+
+Dibawah ini adalah pesanan anda 
+
+Nasi Goreng  	3|	15000.0	|45000.0	(2 pedas)
+Es Teh Manis 	5|	3000.0	|15000.0	(2 jangan pakai gula)
+-----------------------------
+Total		|8		|60000.0
+
+Pembayaran :     BinarCash
+
+=============================
+Simpan struk ini sebagai      
+bukti pembayaran      
+=============================

@@ -8,8 +8,10 @@ import lombok.Setter;
 public class cart {
     private food foodItem;
     private int quantity;
-    public cart(food foodItem, int quantity){
+    private String varian;
+    public cart(food foodItem, int quantity, String varian){
         this.foodItem= foodItem;
         this.quantity = quantity;
+        this.varian = varian;
     }
 }

@@ -23,11 +23,11 @@ public class foodController {
     }
 
     public  void listMenu(){
-        menuItems.add(new food("Nasi Goreng ", 15000));
-        menuItems.add(new food("Mie Goreng ", 13000));
-        menuItems.add(new food("Nasi + Ayam ", 18000));
+        menuItems.add(new food("Nasi Goreng  ", 15000));
+        menuItems.add(new food("Mie Goreng   ", 13000));
+        menuItems.add(new food("Nasi + Ayam  ", 18000));
         menuItems.add(new food("Es Teh Manis ", 3000));
-        menuItems.add(new food("Es Jeruk ", 5000));
+        menuItems.add(new food("Es Jeruk     ", 5000));
         while (isMenu){
             showMenu(menuItems);
             System.out.println("99. Bayar dan Pesan");
@@ -73,7 +73,9 @@ public class foodController {
         System.out.println("(input 0 untuk kembali)");
         System.out.print("Qty =>  ");
         int qty = scanner.nextInt();
-
+        scanner.nextLine();
+        System.out.print("Catatan : ");
+        String varian = scanner.nextLine();
         if (qty == 0) {
             isMenu=true;
         } else {
@@ -81,11 +83,12 @@ public class foodController {
             for (cart cartItem : carts) {
                 if (cartItem.getFoodItem().equals(selectedFood)) {
                     cartItem.setQuantity(cartItem.getQuantity() + qty);
+                    cartItem.setVarian(varian);
                     itemFound = true;
                 }
             }
             if (!itemFound) {
-                cart cartItem = new cart(selectedFood, qty);
+                cart cartItem = new cart(selectedFood, qty, varian);
                 carts.add(cartItem);
             }
         }
@@ -100,7 +103,7 @@ public class foodController {
             General.menuNull();
         }
         for (cart item : carts) {
-            System.out.println(item.getFoodItem().getName() + "\t\t" + item.getQuantity() + "\t" + item.getFoodItem().getPrice());
+            System.out.println(item.getFoodItem().getName() + "\t\t" + item.getQuantity() + "\t" + item.getFoodItem().getPrice() + " | \t"+ item.getQuantity() * item.getFoodItem().getPrice() + "\t (" + item.getVarian() + ")");
             totalPrice += item.getFoodItem().getPrice() * item.getQuantity();
             totalItem += item.getQuantity();
         }
