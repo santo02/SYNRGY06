@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="450b6044-cfea-48fd-9ed6-dcc923f81f6f" name="Changes" comment="challenge_02">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/foodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/foodController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/invoice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +79,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695980802980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="challenge_02">
+      <option name="closed" value="true" />
+      <created>1695994522343</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695994522343</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

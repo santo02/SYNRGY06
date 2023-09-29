@@ -28,6 +28,7 @@ public class foodController {
         menuItems.add(new food("Nasi + Ayam  ", 18000));
         menuItems.add(new food("Es Teh Manis ", 3000));
         menuItems.add(new food("Es Jeruk     ", 5000));
+
         while (isMenu){
             showMenu(menuItems);
             System.out.println("99. Bayar dan Pesan");
