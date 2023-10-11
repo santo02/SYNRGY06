@@ -69,6 +69,7 @@ public class foodController {
     }
 
     public void setQty(int choice) {
+
         food selectedFood = menuItems.get(choice - 1);
         System.out.println(selectedFood.getName() + "\t|" + selectedFood.getPrice());
         System.out.println("(input 0 untuk kembali)");
@@ -100,9 +101,14 @@ public class foodController {
         int totalItem = 0;
 
         General.confirmAndPay();
-        if (carts.size() <= 0){
+//        if (carts.size() <= 0){
+//            General.menuNull();
+//        }
+
+        if (carts.isEmpty()) {
             General.menuNull();
         }
+
         for (cart item : carts) {
             System.out.println(item.getFoodItem().getName() + "\t\t" + item.getQuantity() + "\t" + item.getFoodItem().getPrice() + " | \t"+ item.getQuantity() * item.getFoodItem().getPrice() + "\t (" + item.getVarian() + ")");
             totalPrice += item.getFoodItem().getPrice() * item.getQuantity();
