@@ -1,0 +1,17 @@
+=============================
+Binarfud      
+=============================
+Terimakasih sudah memesan di Binarfud
+
+Dibawah ini adalah pesanan anda 
+
+Nasi + Ayam  	3|	18000.0	|54000.0	(pedas)
+-----------------------------
+Total			|3		|54000.0
+
+Pembayaran :     BinarCash
+
+=============================
+Simpan struk ini sebagai      
+bukti pembayaran      
+=============================
