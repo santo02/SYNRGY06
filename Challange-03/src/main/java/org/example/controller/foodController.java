@@ -23,7 +23,7 @@ public class foodController {
     private boolean isMenu = true;
 
 
-    //    OPTIONAL
+    //    OPTIONAL dan Lambda
     private Optional<food> getMenuFood(int choice) {
         if (choice >= 1 && choice <= menuItems.size()) {
             return Optional.of(menuItems.get(choice - 1));
