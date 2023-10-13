@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import lombok.Getter;
 import org.example.model.food;
 import org.example.model.order;
 import org.example.service.invoice;
@@ -16,23 +17,25 @@ import static org.example.utils.constants.*;
 public class foodController {
 
     private final List<food> menuItems = new ArrayList<>();
-    private final List<order> carts = new ArrayList<>();
+    @Getter
+    private final List<order> orders = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
     private boolean isMenu = true;
 
-//    OPTIONAL
+
+    //    OPTIONAL
     private Optional<food> getMenuFood(int choice) {
         if (choice >= 1 && choice <= menuItems.size()) {
             return Optional.of(menuItems.get(choice - 1));
         }
         return Optional.empty();
     }
-
-    private Optional<order> getorderItem(food foodItem) {
-        return carts.stream()
+    public Optional<order> getorderItem(food foodItem) {
+        return orders.stream()
                 .filter(orderItem -> orderItem.getFoodItem().equals(foodItem))
                 .findFirst();
     }
+
     public void home(){
         General.wellcome();
         listMenu();
@@ -46,11 +49,11 @@ public class foodController {
         menuItems.add(new food("Es Teh Manis ", 3000));
         menuItems.add(new food("Es Jeruk     ", 5000));
 
-        List<food> filteredMenu = menuItems.stream()
-                .filter(food -> food.getPrice() <= 5000)
-                .toList();
-
-        filteredMenu.forEach(i -> System.out.println(i.getName()));
+//        List<food> filteredMenu = menuItems.stream()
+//                .filter(food -> food.getPrice() <= 5000)
+//                .toList();
+//
+//        filteredMenu.forEach(i -> System.out.println(i.getName()));
 
         while (isMenu){
             showMenu(menuItems);
@@ -91,6 +94,8 @@ public class foodController {
         }
     }
 
+
+
     public void setQty(int choice) {
         Optional<food> selectedFood = getMenuFood(choice);
 //        jika menu sudah ada
@@ -103,44 +108,64 @@ public class foodController {
             scanner.nextLine();
             System.out.print("Catatan : ");
             String varian = scanner.nextLine();
-            if (qty == 0) {
-                isMenu = true;
-            } else {
-                Optional<order> orderItem = getorderItem(foodItem);
+
+            //add to Order
+            addToOrders(qty, foodItem, varian);
+
+        }
+    }
+    public void  addToOrders(int qty, food foodItem, String varian){
+        if (qty == 0) {
+            isMenu = true;
+        } else {
+            Optional<order> orderItem = getorderItem(foodItem);
 //                jika sebelumnya udah ada
-                if (orderItem.isPresent()){
-                    order existingCart = orderItem.get();
-                    existingCart.setQuantity(existingCart.getQuantity() + qty);
-                    existingCart.setVarian(varian);
-                }
+            if (orderItem.isPresent()){
+                order existingCart = orderItem.get();
+                existingCart.setQuantity(existingCart.getQuantity() + qty);
+                existingCart.setVarian(varian);
+            }
 //                jika belum
-                else {
-                    order neworderItem = new order(foodItem, qty, varian);
-                    carts.add(neworderItem);
-                }
+            else {
+                order neworderItem = new order(foodItem, qty, varian);
+                orders.add(neworderItem);
             }
         }
     }
 
     public void payment() {
-        double totalPrice = 0;
-        int totalItem = 0;
+        double totalPrice= 0;
 
         General.confirmAndPay();
 
-        if (carts.isEmpty()) {
+        if (orders.isEmpty()) {
             General.menuNull();
+        }else {
+                totalPrice = orders.stream()
+                        .mapToDouble(order -> order.getQuantity()
+                                * order.getFoodItem().getPrice())
+                        .sum();
+
+                int totalItem = orders.stream()
+                        .mapToInt(order -> order.getQuantity())
+                        .sum();
+
+                orders.forEach(item -> {
+                    System.out.println(item.getFoodItem().getName() + DOUBLE_TAB
+                            + item.getQuantity() + ONE_TAB + item.getFoodItem().getPrice() + " | \t"
+                            + item.getQuantity() * item.getFoodItem().getPrice()
+                            + "\t (" + item.getVarian() + ")");
+                });
+
+            System.out.println(THIN_LINE + " + ");
+            System.out.println("Total" + DOUBLE_TAB + ONE_TAB + totalItem + ONE_TAB + totalPrice + NEW_LINE);
+
+            General.menu2();
+            System.out.print("=> ");
+
         }
 
-        for (order item : carts) {
-            System.out.println(item.getFoodItem().getName() + DOUBLE_TAB + item.getQuantity() + ONE_TAB + item.getFoodItem().getPrice() + " | \t"+ item.getQuantity() * item.getFoodItem().getPrice() + "\t (" + item.getVarian() + ")");
-            totalPrice += item.getFoodItem().getPrice() * item.getQuantity();
-            totalItem += item.getQuantity();
-        }
-        System.out.println(THIN_LINE + " +");
-        System.out.println("Total" + DOUBLE_TAB+ONE_TAB + totalItem + ONE_TAB + totalPrice + NEW_LINE);
-        General.menu2();
-        System.out.print("=> ");
+
 
         int continueChoice = scanner.nextInt();
         if (continueChoice == 0) {
@@ -149,7 +174,7 @@ public class foodController {
         }else if(continueChoice == 1) {
             General.confirmPayment();
             invoice invoice = new invoice();
-            invoice.invoiceTxt(carts, totalPrice);
+            invoice.invoiceTxt(orders, totalPrice);
             isMenu= false;
         } else if (continueChoice == 2) {
             isMenu = true;
@@ -158,7 +183,4 @@ public class foodController {
             errorAlert.worngChoice();
         }
     }
-
-
-
 }

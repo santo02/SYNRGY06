@@ -5,9 +5,9 @@ Terimakasih sudah memesan di Binarfud
 
 Dibawah ini adalah pesanan anda 
 
-Nasi + Ayam  	3|	18000.0	|54000.0	(pedas)
+Mie Goreng   	3|	13000.0	|39000.0	(pedas)
 -----------------------------
-Total			|3		|54000.0
+Total			|3		|39000.0
 
 Pembayaran :     BinarCash
 
