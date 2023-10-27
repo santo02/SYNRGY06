@@ -4,6 +4,8 @@ import com.challenge4.model.merchants;
 import com.challenge4.service.MerchantService;
 import com.challenge4.view.HomeView;
 import com.challenge4.view.MerchantView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ public class MerchantController {
     @Autowired
     private MerchantService merchantService;
 
+    private final static Logger logger =  LoggerFactory.getLogger(MerchantController.class);
     public  void MerchantIndex(){
         System.out.println("===================");
         System.out.println("List Merchant");

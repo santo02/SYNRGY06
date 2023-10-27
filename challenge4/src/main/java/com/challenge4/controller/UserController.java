@@ -8,6 +8,8 @@ import com.challenge4.service.UserService;
 import com.challenge4.view.HomeView;
 import com.challenge4.view.ProductView;
 import com.challenge4.view.UserView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private final static Logger logger =  LoggerFactory.getLogger(MerchantController.class);
     public void userIndex() {
         System.out.println("===================");
         System.out.println("List User Terdaftar");

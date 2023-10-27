@@ -8,6 +8,8 @@ import com.challenge4.service.ProductService;
 import com.challenge4.view.HomeView;
 import com.challenge4.view.MerchantView;
 import com.challenge4.view.ProductView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    private final static Logger logger =  LoggerFactory.getLogger(MerchantController.class);
     public void ProductIndex(){
         System.out.println("===================");
         System.out.println("List Product");
