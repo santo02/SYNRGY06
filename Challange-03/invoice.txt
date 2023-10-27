@@ -5,9 +5,11 @@ Terimakasih sudah memesan di Binarfud
 
 Dibawah ini adalah pesanan anda 
 
-Mie Goreng   	3|	13000.0	|39000.0	(pedas)
+Nasi + Ayam  	34|	18000.0	|612000.0	(4)
+Es Teh Manis 	10|	3000.0	|30000.0	(y)
+Nasi Goreng  	10|	15000.0	|150000.0	(mes)
 -----------------------------
-Total			|3		|39000.0
+Total			|54		|792000.0
 
 Pembayaran :     BinarCash
 
