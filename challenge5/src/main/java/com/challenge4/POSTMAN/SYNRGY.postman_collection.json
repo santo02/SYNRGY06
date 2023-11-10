@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "c2eee639-e390-49e2-8979-24351aba77ff",
+		"name": "SYNRGY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15488665",
+		"_collection_link": "https://crimson-flare-300948.postman.co/workspace/Team-Workspace~9b95ce74-01ce-4c01-8fee-56d7ae2330fe/collection/15488665-c2eee639-e390-49e2-8979-24351aba77ff?action=share&source=collection_link&creator=15488665"
+	},
+	"item": [
+		{
+			"name": "Merchant",
+			"item": [
+				{
+					"name": "add new merchant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/merchants/add-merchant",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants",
+								"add-merchant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/merchants/4d89cf96-7fcd-44a5-bcb3-b910385dc38a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants",
+								"4d89cf96-7fcd-44a5-bcb3-b910385dc38a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all merchant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/merchants",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Merchant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/merchants/5ce24b6b-8818-4e45-a5b1-ffbf78948317",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants",
+								"5ce24b6b-8818-4e45-a5b1-ffbf78948317"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update merchant",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"harianja resto\",\r\n    \"location\" : \"Medan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/merchants/355450c2-1b17-43af-b078-5bf5cb5a131a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants",
+								"355450c2-1b17-43af-b078-5bf5cb5a131a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status Only",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/merchants/update/status/3d061a97-9a39-4dd9-835e-c58ed4722285",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"merchants",
+								"update",
+								"status",
+								"3d061a97-9a39-4dd9-835e-c58ed4722285"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "add users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"user001\",\r\n    \"email\" : \"user001@gmail.com\",\r\n    \"password\" : \"password\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/5caa36c7-100b-4832-90bc-538f80334c04",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"5caa36c7-100b-4832-90bc-538f80334c04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/d2cc2535-c347-40ea-9d16-82ffaaccb317",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"d2cc2535-c347-40ea-9d16-82ffaaccb317"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update users",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\" : \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/5caa36c7-100b-4832-90bc-538f80334c04",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"5caa36c7-100b-4832-90bc-538f80334c04"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "New Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Keu Lapis\",\r\n    \"price\" : \"50000\",\r\n    \"merchant\" : {\r\n        \"id\" : \"66300e48-8c50-4b02-934e-1ba1366d4a46\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/add/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"add",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/product/690396e9-c2e1-430c-9708-d5a451b8213f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"690396e9-c2e1-430c-9708-d5a451b8213f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete products",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/product/cb5c5ba7-ea56-46f7-a304-5508d514deb3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"cb5c5ba7-ea56-46f7-a304-5508d514deb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ayam bakar keju\",\r\n    \"price\": 20000  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/0fc51a11-2d3b-4ceb-8c73-129eda70c71f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"0fc51a11-2d3b-4ceb-8c73-129eda70c71f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "New Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"destinationAddress\": \"silain blok 04\",\r\n\r\n  \"users\": {\r\n    \"id\": \"5caa36c7-100b-4832-90bc-538f80334c04\"\r\n  },\r\n  \"orderDetails\": [\r\n    {\r\n      \"products\": {\r\n        \"id\": \"690396e9-c2e1-430c-9708-d5a451b8213f\"\r\n      },\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ALL Orders",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
