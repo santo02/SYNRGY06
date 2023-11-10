@@ -4,9 +4,12 @@ import com.challenge4.model.merchants;
 import com.challenge4.model.products;
 import com.challenge4.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -16,12 +19,42 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public products addProduct(String name, Double price, merchants merchant){
-        products product = new products();
-        product.setName(name);
-        product.setPrice(price);
-        product.setMerchant(merchant);
+    public products addProduct(products products){
+       return productRepository.save(products);
+    }
+    public products getById(UUID idProduct) {
+        Optional<products> productsOptional = productRepository.findById(idProduct);
+        if(productsOptional.isEmpty()){
+            return null;
+        }
+        return productsOptional.get();
 
-       return productRepository.save(product);
+    }
+
+    public products delete(UUID IdProduct) {
+        Optional<products> productsOptional = productRepository.findById(IdProduct);
+        if(productsOptional.isEmpty()){
+            return null;
+        }
+        products deleteProduct = productsOptional.get();
+        productRepository.deleteById(IdProduct);
+        return deleteProduct;
+    }
+
+    public products updateProduct(UUID productId, products updatedProduct) {
+        products existingProduct = null;
+        try {
+            existingProduct = productRepository.findById(productId)
+                    .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+        } catch (ChangeSetPersister.NotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        existingProduct.setName(updatedProduct.getName());
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setMerchant(updatedProduct.getMerchant());
+
+        return productRepository.save(existingProduct);
     }
 }

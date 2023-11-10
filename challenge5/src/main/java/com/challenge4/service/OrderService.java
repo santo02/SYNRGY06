@@ -19,18 +19,23 @@ public class OrderService {
     OrderRepository orderRepository;
     @Autowired
     OrderDetailRepository orderDetailRepository;
-    public orders orderProduct(users user, String destinationAddress, List<OrderDetails> orderDetails) {
-        orders newOrder = new orders();
-        newOrder.setUsers(user);
-        newOrder.setOrderTime(LocalDateTime.now());
-        newOrder.setCompleted(false);
-        newOrder.setDestinationAddress(destinationAddress);
-        orderRepository.save(newOrder);
-        for (OrderDetails detail : orderDetails) {
-            detail.setOrders(newOrder);
-            orderDetailRepository.save(detail);
-        }
-        return newOrder;
+    public orders orderProduct(orders order) {
+        order.setOrderTime(LocalDateTime.now());
+        order.setCompleted(false);
+
+        OrderDetails orderDetail = new OrderDetails();
+        order.addOrderDetail(orderDetail);
+
+        orderDetail.setQuantity(orderDetail.getQuantity());
+
+        Double productPrice = orderDetail.getProducts().getPrice();
+        orderDetail.setTotalPrice(orderDetail.getQuantity() * productPrice);
+
+        return orderRepository.save(order);
+    }
+
+    public List<orders> getAllOrders() {
+        return orderRepository.findAll();
     }
 
     public List<OrderDetails> getOrderDetailsForUser(UUID userId) {

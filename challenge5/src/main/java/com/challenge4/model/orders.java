@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Setter
@@ -21,11 +23,19 @@ public class orders {
     LocalDateTime orderTime;
     String destinationAddress;
 
+
     @ManyToOne(targetEntity = users.class)
     @JoinColumn(name = "user_id")
     private users users;
 
     boolean isCompleted;
 
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetails> orderDetails = new ArrayList<>();
+
+    public void addOrderDetail(OrderDetails orderDetail) {
+        this.orderDetails.add(orderDetail);
+        orderDetail.setOrders(this);
+    }
 
 }

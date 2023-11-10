@@ -4,22 +4,18 @@ import com.challenge4.model.merchants;
 import com.challenge4.model.products;
 import com.challenge4.model.users;
 import com.challenge4.repository.UserRepository;
+import com.challenge4.response.ResponseHandler;
 import com.challenge4.service.UserService;
-import com.challenge4.view.HomeView;
-import com.challenge4.view.ProductView;
-import com.challenge4.view.UserView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Scanner;
+import java.util.UUID;
 
-import static org.apache.logging.log4j.util.LambdaUtil.getAll;
-@Component
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,132 +26,40 @@ public class UserController {
     private UserRepository userRepository;
 
     private final static Logger logger =  LoggerFactory.getLogger(MerchantController.class);
-    public void userIndex() {
-        System.out.println("===================");
-        System.out.println("List User Terdaftar");
-        System.out.println("===================");
-        List<users> usersList = userService.getAll();
-        UserView.showAllUsers(usersList);
-        System.out.println("===================");
-        UserView.userMenu();
-        SelectUserMenu();
+
+    @PostMapping
+    public users add(@RequestBody users user){
+        return userService.create(user);
     }
 
-    private void SelectUserMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int menuSelect = scanner.nextInt();
-
-        if (menuSelect == 1){
-            addUser();
-        } else if (menuSelect == 2) {
-            editUser();
-        } else if (menuSelect == 3) {
-            deleteUser();
-        }else{
-            HomeView.worngSelection();
-        }
+    @GetMapping
+    public List<users> getAll(){
+        return userService.getAll();
     }
 
-    private void deleteUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("======================");
-        System.out.println("\tHAPUS USER");
-        System.out.println("======================");
-        List<users> user = userRepository.findAll();
-        System.out.println("Daftar User:");
-        UserView.showAllUsers(user);
-        System.out.print("Pilih User : ");
-        int userSelected = scanner.nextInt();
-        scanner.nextLine();
+    @GetMapping("{id}")
+    public users show(@PathVariable("id") UUID idUser){
+        return userService.getById(idUser);
+    }
 
-        if (userSelected < 1 || userSelected > user.size()) {
-            System.out.println("Pilihan Tidak valid.");
-        } else {
-            users selectedUser = user.get(userSelected - 1);
-            System.out.print("Anda yakin ingin menghapus user ini? (Y/N): ");
-            String confirmation = scanner.next();
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") UUID idUser){
+        try {
+            users deleteuser = userService.delete(idUser);
 
-            if (confirmation.equalsIgnoreCase("Y")) {
-                userRepository.delete(selectedUser);
-                System.out.println("User berhasil dihapus.");
+            if (deleteuser != null) {
+                return  ResponseHandler.generateResponse("Data berhasil di hapus!", HttpStatus.OK, deleteuser );
             } else {
-                System.out.println("Penghapusan dibatalkan.");
+                return  ResponseHandler.generateResponse("Data Tidak Ditemukan", HttpStatus.NOT_FOUND, null);
             }
-
-            userIndex();
+        }catch (Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
     }
-
-    private void editUser() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("===================");
-        System.out.println("List User Terdaftar");
-        System.out.println("===================");
-        List<users> usersList = userService.getAll();
-        UserView.showAllUsers(usersList);
-        System.out.println("===================");
-        System.out.print("Silahkan pilih user : ");
-
-        int userSelected = scanner.nextInt();
-        scanner.nextLine();
-        if (userSelected < 1 || userSelected > usersList.size()) {
-            System.out.println("Pilihan Tidak valid.");
-        } else {
-            users selectedUser = usersList.get(userSelected - 1);
-
-            System.out.print("Masukkan Nama User Baru (kosongkan jika tidak ingin mengubah nama): ");
-            String newName = scanner.nextLine();
-
-            System.out.print("Masukkan  Email User Baru (kosongkan jika tidak ingin mengubah email): ");
-            String newEmail = scanner.nextLine();
-
-            System.out.print("Masukkan  Password User Baru (kosongkan jika tidak ingin mengubah  password): ");
-            String newPassword = scanner.nextLine();
-
-
-
-            if (!newName.isEmpty()) {
-                selectedUser.setName(newName);
-            }
-
-            if (!newEmail.isEmpty()) {
-                selectedUser.setEmail(newEmail);
-            }
-            if (!newPassword.isEmpty()){
-            selectedUser.setPassword(newPassword);
-            }
-
-            users update = userRepository.save(selectedUser);
-            if (update != null){
-                System.out.println("Berhasil Mengupadate User");
-            }else {
-                System.out.println("Gagal Mengupdate User");
-            }
-            userIndex();
-        }
-    }
-
-    private void addUser() {
-        users user = new users();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("======================");
-        System.out.println("\tTAMBAH USER");
-        System.out.println("======================");
-
-        System.out.print("Masukkan Nama  : ");
-        String name = scanner.nextLine();
-        System.out.print("Masukkan email : ");
-        String email = scanner.nextLine();
-        System.out.print("Masukkan Password : ");
-        String password = scanner.nextLine();
-
-
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-
-        userService.create(user);
-        userIndex();
+    @PatchMapping("{userID}")
+    public ResponseEntity<Object> updateUser(@PathVariable UUID userID,
+                                                @RequestBody users updatedUser) {
+        users userResponseUpdate = userService.updateUSer(userID, updatedUser);
+        return ResponseHandler.generateResponse("USer updated successfully", HttpStatus.OK, userResponseUpdate);
     }
 }

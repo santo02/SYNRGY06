@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MerchantService {
@@ -25,5 +27,47 @@ public class MerchantService {
 
     public  List<merchants> findOpenMerchants(){
         return  merchantReopsitory.findByIsOpenTrue();
+    }
+
+    public merchants getById(UUID idMerchant) {
+        Optional<merchants> merchantOptional = merchantReopsitory.findById(idMerchant);
+        if(merchantOptional.isEmpty()){
+            return null;
+        }
+        return merchantOptional.get();
+
+    }
+
+    public merchants delete(UUID idMerchant) {
+        Optional<merchants> merchantOptional = merchantReopsitory.findById(idMerchant);
+        if(merchantOptional.isEmpty()){
+            return null;
+        }
+        merchants deleteMerchants = merchantOptional.get();
+        merchantReopsitory.deleteById(idMerchant);
+        return deleteMerchants;
+    }
+
+    public merchants updateMerchant(UUID id, merchants updatedMerchant) {
+        return merchantReopsitory.findById(id)
+                .map(existingMerchant -> {
+                    if (updatedMerchant.getName() != null) {
+                        existingMerchant.setName(updatedMerchant.getName());
+                    }
+                    if (updatedMerchant.getLocation() != null) {
+                        existingMerchant.setLocation(updatedMerchant.getLocation());
+                    }
+
+                    return merchantReopsitory.save(existingMerchant);
+                })
+                .orElse(null); // Handle the case where the merchant with the given ID is not found
+    }
+    public merchants updateStatus(UUID id) {
+        return merchantReopsitory.findById(id)
+                .map(existingMerchant -> {
+                    existingMerchant.setOpen(!existingMerchant.isOpen()); // Toggle the status
+                    return merchantReopsitory.save(existingMerchant);
+                })
+                .orElse(null);
     }
 }

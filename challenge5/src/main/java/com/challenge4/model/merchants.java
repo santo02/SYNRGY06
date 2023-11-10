@@ -19,7 +19,10 @@ public class merchants {
 
     String name;
     String location;
-    boolean isOpen;
+   private  boolean isOpen;
+
+
+
 
     public void print() {
             System.out.println("Name : "+name +"\t | location :"+location + "\t | Buka: "+ openLabel());
